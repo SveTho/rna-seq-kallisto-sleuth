@@ -220,6 +220,23 @@ enrichment:
         upregulated_gene_set: "dummy_up" 
         downregulated_gene_set: "dummy_down" 
         plot_color_by: "colname_sample_sheet"
+    # If activated, you need to provide at least one gene set under `gene_sets:`, below.
+    activate: false
+    gene_sets:
+      # Choose a descriptive name for your gene set, this will be part of the resulting
+      # file names.
+      dummy:
+        # GMT file with one or two gene sets of interest.
+        file: "config/gene_sets/dummy.gmt"
+        # Mandatory gene set, usually with genes known to be up-regulated in a particular setting.
+        # If you only have one gene set without a known direction of regulation, also provide it here.
+        upregulated_gene_set: "dummy_up" 
+        # Optional gene set, with genes knwon to be down-regulated in a particular setting.
+        # If you only have one gene set without a known direction of regulation, make this an empty string: ""
+        downregulated_gene_set: "dummy_down" 
+        # sample sheet column to use for categorical coloring of sample data points
+        plot_color_by: "colname_sample_sheet"
+        # sample sheet column to use for categorical shape selection of sample data points
         plot_shape_by: "colname_sample_sheet"
       # any_other_gene_set:
       #   file: "config/gene_sets/dummy.gmt"

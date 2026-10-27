@@ -248,7 +248,7 @@ deconvolution:
     # For citation please refer to Angel A, Aran D, et al. "xCell 2.0: robust algorithm for cell type proportion estimation predicts response to immune checkpoint blockade." Genome Biology, 2025. (doi: 10.1186/s13059-025-03784-3)
     xcell2:
     activate: false
-    # choose one of the models defined under diffexp - ??? multiple models are possible ???
+    # choose one or more of the models defined under diffexp, to run the deconvolution on the TPM matrix generated for each of those models
     models:
       - treated_vs_untreated
     # download of cell type reference data sets for deconvolution analysis carried out by xcell2

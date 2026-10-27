@@ -11,7 +11,6 @@ library(seriation)
 
 # ---- inputs from Snakemake ----
 gene_counts_path <- snakemake@input[["gene_counts"]]
-transcript_index <- snakemake@input[["transcript_ref"]]
 ref_path         <- snakemake@input[["ref"]]
 ref_set_name     <- gsub("\\..*", "", basename(ref_path))
 

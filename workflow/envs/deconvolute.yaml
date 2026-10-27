@@ -6,4 +6,7 @@ dependencies:
   - r-tidyverse
   - bioconductor-xcell2
   - bioconductor-complexheatmap
-  - r-seriation
+  - r-tidyverse=2
+  - bioconductor-xcell2=1.2.3
+  - bioconductor-complexheatmap=2.26.1
+  - r-seriation=1.5

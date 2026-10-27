@@ -40,7 +40,7 @@ all_sets <- names(gene_set)
 up_set   <- snakemake@params[["up_set"]]
 down_set <- snakemake@params[["down_set"]]
 
-singscore_output <- if (down_set == "") {
+singscore_output <- if (down_set != "") {
   simpleScore(data_ranked, upSet = gene_set[[up_set]], downSet = gene_set[[down_set]])
 } else {
   simpleScore(data_ranked, upSet = gene_set[[up_set]])

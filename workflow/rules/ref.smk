@@ -141,7 +141,7 @@ rule get_decon_references:
         "logs/xcell2/{celltype_reference}.get_decon_ref.log",
     localrule: True
     params:
-        base_url="https://raw.githubusercontent.com/AlmogAngel/xCell2/master/data/",
+        base_url="https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/",
     shell:
         """
         curl -fsSL {params.base_url}/{wildcards.celltype_reference}.xCell2Ref.rda -o {output.rda} >{log} 2>&1

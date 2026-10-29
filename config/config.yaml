@@ -205,7 +205,7 @@ enrichment:
     # minimum achievable p-value  (equivalent to the reciprocal of the number of permutations, see fgsea docs)
     eps: 1.0e-50
   singscore:
-    # Singscore calcutlation based on the following articles:
+    # Singscore calculation based on the following articles:
     # Foroutan M, Bhuva D, Lyu R, Horan K, Cursons J, Davis M (2018). "Single sample scoring of molecular phenotypes." BMC Bioinformatics, 19(1), 404. doi:10.1186/s12859-018-2435-4
     # Bhuva D, Cursons J, Davis M (2020). "Stable gene expression for normalisation and single-sample scoring." Nucleic Acids Research, 48(19), e113. doi:10.1093/nar/gkaa802
     # the R-package can be found at:

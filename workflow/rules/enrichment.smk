@@ -164,7 +164,8 @@ rule goatools_go_enrichment:
         "../scripts/goatools-go-enrichment-analysis.py"
 
 
-# running singscore with provided genesets in gmt format 
+# running singscore with provided genesets in gmt format
+
 
 rule singscore:
     input:
@@ -177,20 +178,19 @@ rule singscore:
     output:
         singscore_plt="results/plots/singscore/{model}.{gene_set_group}.tiff",
         singscore_tbl="results/tables/sigscore/{model}.{gene_set_group}.tsv",
-        
     log:
         "logs/singscore_{model}.{gene_set_group}.log",
     conda:
         "../envs/singscore.yaml"
     params:
         up_set=lookup(
-            within=config, 
+            within=config,
             dpath="enrichment/singscore/gene_sets/{gene_set_group}/upregulated_gene_set",
-            ),
+        ),
         down_set=lookup(
-            within=config, 
+            within=config,
             dpath="enrichment/singscore/gene_sets/{gene_set_group}/downregulated_gene_set",
-            ),
+        ),
         color_aes=lookup(
             within=config,
             dpath="enrichment/singscore/gene_sets/{gene_set_group}/plot_color_by",

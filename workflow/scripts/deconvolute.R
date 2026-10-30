@@ -12,7 +12,7 @@ library(seriation)
 # ---- inputs from Snakemake ----
 gene_counts_path <- snakemake@input[["gene_counts"]]
 ref_path <- snakemake@input[["ref"]]
-ref_set_name <- gsub("\\..*", "", basename(ref_path))
+ref_set_name <- snakemake@wildcards[["celltype_reference"]]
 
 # ---- getting data from sleuth model and collapse transcripts to gene symbol and removing non expressed genes ----
 data_matrix <- read_tsv(gene_counts_path) |>

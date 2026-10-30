@@ -91,8 +91,8 @@ n_cols <- nrow(decon_clean)
 n_rows <- ncol(decon_clean)
 
 ### scaling factor
-row_height <- 8
-col_width <- 5
+row_height <- 0.4
+col_width <- 0.2
 
 plot_height <- max(4, n_rows * row_height + 2)
 plot_width <- max(4, n_cols * col_width + 10)

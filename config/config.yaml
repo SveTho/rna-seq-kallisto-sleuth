@@ -204,46 +204,36 @@ enrichment:
     fdr_gene_set: 0.05
     # minimum achievable p-value  (equivalent to the reciprocal of the number of permutations, see fgsea docs)
     eps: 1.0e-50
+  # Singscore calculation
+  # This score is based on the following articles:
+  # Foroutan M, Bhuva D, Lyu R, Horan K, Cursons J, Davis M (2018). "Single sample scoring of molecular phenotypes." BMC Bioinformatics, 19(1), 404. doi:10.1186/s12859-018-2435-4
+  # Bhuva D, Cursons J, Davis M (2020). "Stable gene expression for normalisation and single-sample scoring." Nucleic Acids Research, 48(19), e113. doi:10.1093/nar/gkaa802
+  # The R-package and its documentation can be found at:
+  # https://bioconductor.org/packages/release/bioc/html/singscore.html
   singscore:
-    # Singscore calculation based on the following articles:
-    # Foroutan M, Bhuva D, Lyu R, Horan K, Cursons J, Davis M (2018). "Single sample scoring of molecular phenotypes." BMC Bioinformatics, 19(1), 404. doi:10.1186/s12859-018-2435-4
-    # Bhuva D, Cursons J, Davis M (2020). "Stable gene expression for normalisation and single-sample scoring." Nucleic Acids Research, 48(19), e113. doi:10.1093/nar/gkaa802
-    # the R-package can be found at:
-    # https://bioconductor.org/packages/release/bioc/html/singscore.html
-    # for more details of the source code refer to:
-    # https://github.com/DavisLaboratory/singscore
-    activate: false
-    # If activated, you need to provide a GMT file with gene sets of interest. If your gmt file of intrest contains only one gene list the downregulated_gene_set is set to an empty string ("")
-    gene_sets:
-      dummy:
-        file: "config/gene_sets/dummy.gmt"
-        upregulated_gene_set: "dummy_up" 
-        downregulated_gene_set: "dummy_down" 
-        plot_color_by: "colname_sample_sheet"
     # If activated, you need to provide at least one gene set under `gene_sets:`, below.
     activate: false
     gene_sets:
-      # Choose a descriptive name for your gene set, this will be part of the resulting
-      # file names.
+      # Choose a descriptive name for your gene set(s), this will be part of the
+      # resulting file names. Provide as many entries here, as you like.
       dummy:
-        # GMT file with one or two gene sets of interest.
+        # GMT file, including one or two gene sets of interest (see
+        # upregulated/downregulated_gene_set below).
         file: "config/gene_sets/dummy.gmt"
-        # Mandatory gene set, usually with genes known to be up-regulated in a particular setting.
-        # If you only have one gene set without a known direction of regulation, also provide it here.
+        # Mandatory gene set, usually with genes known to be up-regulated in a
+        # particular setting. If you only have one gene set without a known
+        # direction of regulation, also provide it here.
         upregulated_gene_set: "dummy_up" 
-        # Optional gene set, with genes knwon to be down-regulated in a particular setting.
-        # If you only have one gene set without a known direction of regulation, make this an empty string: ""
+        # Optional gene set, with genes known to be down-regulated in a
+        # particular setting. If you only have one gene set without a known
+        # direction of regulation, make this an empty string: ""
         downregulated_gene_set: "dummy_down" 
-        # sample sheet column to use for categorical coloring of sample data points
+        # sample sheet column to use for categorical coloring of sample data
+        # points
         plot_color_by: "colname_sample_sheet"
-        # sample sheet column to use for categorical shape selection of sample data points
+        # sample sheet column to use for categorical shape selection of sample
+        # data points
         plot_shape_by: "colname_sample_sheet"
-      # any_other_gene_set:
-      #   file: "config/gene_sets/dummy.gmt"
-      #   upregulated_gene_set: "bap1_up" 
-      #   downregulated_gene_set: "bap1_down" 
-      #   plot_color_by: "colname_sample_sheet"
-      #   plot_shape_by: "colname_sample_sheet"
   spia:
     # signaling pathway impact analysis (SPIA)
     # If `activate: true`, the workflow will perform SPIA with spia:
@@ -264,30 +254,37 @@ enrichment:
       - kegg
 
 deconvolution:
-    # The deconvolution with xcell2 use the following R-package:
+    # Deconvolution uses xcell2:
     # https://bioconductor.org/packages/release/bioc/html/xCell2.html
     # For citation please refer to:
     # Angel A, Aran D, et al. "xCell 2.0: robust algorithm for cell type proportion estimation predicts response to immune checkpoint blockade." Genome Biology, 2025. (doi: 10.1186/s13059-025-03784-3)
   xcell2:
     activate: false
-    # choose one or more of the models defined under diffexp, to run the deconvolution on the TPM matrix generated for each of those models
+    # Choose one or more of the models defined under diffexp.
+    # xcell2 deconvolution will be run on the TPM matrix of the chosen model(s).
     models:
       - treated_vs_untreated
-    # download of cell type reference data sets for deconvolution analysis carried out by xcell2
-    # available references can be found here: https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/
+    # Cell type reference data set(s) for xcell2 deconvolution.
+    # All available references can be found here: https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/
+    # Files all follow the schema '<celltype_reference>.xCell2Ref.rda'.
+    # Here, you only need to specify the <celltype_reference> part, for which
+    # the following are available for human and mouse, respectively:
     # homo_sapiens:
-    #   - LM22:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/LM22.xCell2Ref.rda
-    #   - BlueprintEncode:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/BlueprintEncode.xCell2Ref.rda
-    #   - ImmuneCompendium:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/ImmuneCompendium.xCell2Ref.rda
-    #   - TabulaSapiensBlood:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/TabulaSapiensBlood.xCell2Ref.rda
-    #   - TMECompendium:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/TMECompendium.xCell2Ref.rda
-    #   - PanCancer:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/PanCancer.xCell2Ref.rda    
+    #   - LM22
+    #   - BlueprintEncode
+    #   - ImmuneCompendium
+    #   - TabulaSapiensBlood
+    #   - TMECompendium
+    #   - PanCancer
     # mus_musculus:
-    #   - MouseRNAseqData:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/MouseRNAseqData.xCell2Ref.rda
-    #   - ImmGenData:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/ImmGenData.xCell2Ref.rda
-    #   - TabulaMurisBlood:https://github.com/AlmogAngel/xCell2/raw/03d0d256e5d43c13ab3882f04a7f7ec32766f60b/data/TabulaMurisBlood.xCell2Ref.rda
-    # If you have build your own reference set with xcell2 before, the rda file must be placed here:
-    # "resources/celltype_references/{celltype_reference}.xCell2Ref.rda",
+    #   - MouseRNAseqData
+    #   - ImmGenData
+    #   - TabulaMurisBlood
+    # Alternatively, you can build your own reference set with xCell2Train:
+    # https://bioconductor.org/packages/3.23/bioc/vignettes/xCell2/inst/doc/xCell2-vignette.html#creating-a-custom-reference-with-xcell2train
+    # Then, name the resulting RDA file according to the file name schema,
+    # provide the `{celltype_reference}` below and place the file at:
+    # resources/celltype_references/{celltype_reference}.xCell2Ref.rda
     celltype_references:
       - LM22
       - BlueprintEncode

@@ -3,10 +3,7 @@ channels:
   - bioconda 
   - nodefaults 
 dependencies:
-  - r-tidyverse
-  - bioconductor-xcell2
-  - bioconductor-complexheatmap
   - r-tidyverse=2
-  - bioconductor-xcell2=1.2.3
-  - bioconductor-complexheatmap=2.26.1
+  - bioconductor-xcell2=1.2
+  - bioconductor-complexheatmap=2.26
   - r-seriation=1.5

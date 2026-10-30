@@ -15,7 +15,7 @@ ref_path <- snakemake@input[["ref"]]
 ref_set_name <- gsub("\\..*", "", basename(ref_path))
 
 # ---- getting data from sleuth model and collapse transcripts to gene symbol and removing non expressed genes ----
-data_matrix <- read_tsv(gene_counts_path) %>%
+data_matrix <- read_tsv(gene_counts_path) |>
   group_by(gene) |>
   summarize(
     across(where(is.numeric), sum)
@@ -30,8 +30,8 @@ if (nrow(dupes) > 0) {
   message(paste(dupes$gene, collapse = ", "))
 }
 
-data_input <- data_matrix %>%
-  column_to_rownames(var = "gene") %>%
+data_input <- data_matrix |>
+  column_to_rownames(var = "gene") |>
   mutate_all(~ log10(. + 3))
 
 
@@ -59,8 +59,8 @@ xcell_xprt <- as_tibble(xcell2_res, rownames = "cell_type")
 write_tsv(xcell_xprt, snakemake@output[["decon_scores"]])
 
 ### plotting convoluted matrices
-decon_heatmap <- xcell2_res %>%
-  t() %>%
+decon_heatmap <- xcell2_res |>
+  t() |>
   scale
 
 decon_clean <- decon_heatmap[, !colSums(is.na(decon_heatmap))]

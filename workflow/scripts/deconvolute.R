@@ -23,7 +23,8 @@ data_matrix <- read_tsv(gene_counts_path) |>
   ungroup() |>
   filter(!is.na(gene))
 
-# checking for duplicates ! keep an eye on output in generell there should be no duplicated gene
+# checking for duplicates ! keep an eye on output, there should be no
+# duplicated gene
 dupes <- data_matrix[duplicated(data_matrix$gene), ]
 if (nrow(dupes) > 0) {
   message("Duplicated gene entries found:")
@@ -32,6 +33,7 @@ if (nrow(dupes) > 0) {
 
 data_input <- data_matrix |>
   column_to_rownames(var = "gene") |>
+  # TODO: add reference / linkout with rationale for transform
   mutate_all(~ log10(. + 3))
 
 
@@ -50,6 +52,9 @@ message(paste(ref_set_name, input_shared, sep = ": "))
 xcell2_res <- xCell2::xCell2Analysis(
   mix = data_input,
   xcell2object = ref_obj,
+  # TODO: determine whether we don't want a fixed value here, e.g. 0.8, to
+  # have a hard failure whenever the reference does not fit the dataset
+  # properly and results are unlikely to be useful
   minSharedGenes = input_shared
 )
 

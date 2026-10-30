@@ -2,9 +2,8 @@ channels:
   - conda-forge
   - bioconda
   - nodefaults
-
 dependencies:
   - r-tidyverse=2
-  - bioconductor-singscore=1.30.0
-  - bioconductor-gseabase=1.72.0
-  - bioconductor-complexheatmap=2.26.1
+  - bioconductor-singscore=1.30
+  - bioconductor-gseabase=1.72
+  - bioconductor-complexheatmap=2.26

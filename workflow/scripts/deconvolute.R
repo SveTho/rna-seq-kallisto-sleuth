@@ -89,16 +89,13 @@ n_rows <- ncol(decon_clean)
 row_height <- 8
 col_width <- 5
 
-plot_height <- max(10, n_rows * row_height)
-plot_width <- max(6, n_cols * col_width)
+plot_height <- max(4, n_rows * row_height + 2)
+plot_width <- max(4, n_cols * col_width + 10)
 
 
-tiff(
+pdf(
   snakemake@output[["heatmap"]],
-  res = 150,
   pointsize = 10,
-  units = "mm",
-  compression = "lzw",
   width = plot_width,
   height = plot_height
 )

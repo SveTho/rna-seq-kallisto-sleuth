@@ -64,14 +64,11 @@ write_tsv(score_df, snakemake@output[["singscore_tbl"]])
 
 # ---- plot, sized dynamically to the number of samples ----
 n_samples <- nrow(score_df)
-plot_width <- max(6, n_samples * 0.15)
+plot_width <- max(6, n_samples * 0.15 + 1)
 plot_height <- 4
 
-tiff(
-  filename = snakemake@output[["singscore_plt"]],
-  res = 150,
-  compression = "lzw",
-  units = "in",
+pdf(
+  file = snakemake@output[["singscore_plt"]],
   width = plot_width,
   height = plot_height,
   pointsize = 16

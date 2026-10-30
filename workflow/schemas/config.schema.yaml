@@ -182,7 +182,7 @@ properties:
                   plot_shape_by:
                     type: string
         required:
-          - gene_sets
+          - activate
       spia:
         type: object
         properties:

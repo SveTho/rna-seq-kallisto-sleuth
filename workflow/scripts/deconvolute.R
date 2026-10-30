@@ -68,7 +68,7 @@ decon_heatmap <- xcell2_res |>
   t() |>
   scale
 
-decon_clean <- decon_heatmap[, !colSums(is.na(decon_heatmap))]
+decon_clean <- decon_heatmap[, !colSums(is.na(decon_heatmap)), drop = FALSE]
 ### calculating sample and gene deistribution by seriate
 col_dis <- dist(decon_clean, method = "euclidean")
 col_clst <- hclust(col_dis, method = "ward.D2")

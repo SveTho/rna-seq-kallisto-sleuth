@@ -17,8 +17,8 @@ transcript_index <- read_tsv(snakemake@input[["transcript_ref"]])
 group <- snakemake@wildcards[["gene_set_group"]]
 
 #### definition of aes for the plot
-color_aes <- snakemake@params[["color_aes"]]
-shape_aes <- snakemake@params[["shape_aes"]]
+color_column <- snakemake@params[["color_column"]]
+shape_column <- snakemake@params[["shape_column"]]
 
 #### calculation of singscore
 #### summarize transcripts to gene_symbol
@@ -55,6 +55,8 @@ score_df <- data.frame(
   sample = colnames(xpr_matrix),
   score = singscore_output$TotalScore
 ) |>
+  # TODO: check what this is intended to do and make it more specific, to
+  # avoid greedily renaming samples that do start with t-
   mutate(sample = sub("t-.*", "t", sample)) |>
   left_join(smpl_data, by = "sample") |>
   distinct(sample, .keep_all = TRUE) |>
@@ -79,8 +81,8 @@ ggplot(
   aes(
     x = sample,
     y = score,
-    color = .data[[color_aes]],
-    shape = .data[[shape_aes]]
+    color = .data[[color_column]],
+    shape = .data[[shape_column]]
   )
 ) +
   geom_point(size = 12 / .pt) +

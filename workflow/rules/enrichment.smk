@@ -191,11 +191,11 @@ rule singscore:
             within=config,
             dpath="enrichment/singscore/gene_sets/{gene_set_group}/downregulated_gene_set",
         ),
-        color_aes=lookup(
+        color_column=lookup(
             within=config,
             dpath="enrichment/singscore/gene_sets/{gene_set_group}/plot_color_by",
         ),
-        shape_aes=lookup(
+        shape_column=lookup(
             within=config,
             dpath="enrichment/singscore/gene_sets/{gene_set_group}/plot_shape_by",
         ),

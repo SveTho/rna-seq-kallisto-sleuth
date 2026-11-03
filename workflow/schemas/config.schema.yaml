@@ -25,7 +25,7 @@ properties:
             - plot-qc
             - vendor
             - activate
-      
+
   resources:
     type: object
     properties:
@@ -98,7 +98,7 @@ properties:
       genes_of_interest:
         type: object
         properties:
-          activate: 
+          activate:
             type: boolean
           gene_lists:
             type: object
@@ -248,7 +248,7 @@ properties:
         enum:
           - short_read
           - long_read
-        default: short_read 
+        default: short_read
       long_read_platform:
         type: string
         enum:

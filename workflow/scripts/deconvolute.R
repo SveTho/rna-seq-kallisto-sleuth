@@ -52,9 +52,6 @@ message(paste(ref_set_name, input_shared, sep = ": "))
 xcell2_res <- xCell2::xCell2Analysis(
   mix = data_input,
   xcell2object = ref_obj,
-  # TODO: determine whether we don't want a fixed value here, e.g. 0.8, to
-  # have a hard failure whenever the reference does not fit the dataset
-  # properly and results are unlikely to be useful
   minSharedGenes = input_shared
 )
 
@@ -81,6 +78,7 @@ row_seriat <- reorder(row_clst, row_dis, method = "OLO")
 ### plotting and layout of heatmap
 ht <- Heatmap(
   t(decon_clean),
+  column_title = paste0(ref_set_name, "(", input_shared, ")"), 
   cluster_columns = as.dendrogram(col_seriat),
   cluster_rows = as.dendrogram(row_seriat),
   row_names_max_width = unit(200, "mm")

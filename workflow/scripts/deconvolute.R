@@ -33,8 +33,8 @@ if (nrow(dupes) > 0) {
 
 data_input <- data_matrix |>
   column_to_rownames(var = "gene") |>
-  # TODO: add reference / linkout with rationale for transform
-  mutate_all(~ log10(. + 3))
+  # rationale for log2(+3) transformation can be found here https://link.springer.com/article/10.1186/s13059-025-03784-3#:~:text=Next%2C%20both%20bulk%20and%20scRNA-seq,by%20log2%20conversion
+  mutate_all(~ log2(. + 3))
 
 
 # ---- load the .rda reference set (replaces get_refs/readRDS) ----

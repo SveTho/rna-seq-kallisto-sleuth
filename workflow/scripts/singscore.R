@@ -54,10 +54,7 @@ singscore_output <- if (down_set != "") {
 score_df <- data.frame(
   sample = colnames(xpr_matrix),
   score = singscore_output$TotalScore
-) |>
-  # TODO: check what this is intended to do and make it more specific, to
-  # avoid greedily renaming samples that do start with t-
-  mutate(sample = sub("t-.*", "t", sample)) |>
+  ) |>
   left_join(smpl_data, by = "sample") |>
   distinct(sample, .keep_all = TRUE) |>
   arrange(score)
